@@ -101,7 +101,7 @@ resource "aws_security_group" "terraform-sec" {
 # no more inline blocks - now using security rules
 resource "aws_security_group_rule" "allow_server_http_inbound" {
   type = "ingress"
-  security_group_id = aws_security_group_terraform-sec.id
+  security_group_id = aws_security_group.terraform-sec.id
 
   from_port   = var.server_port
   to_port     = var.server_port
@@ -196,7 +196,7 @@ resource "aws_security_group" "alb" {
 # crete security rule without using the old inline blocks
 resource "aws_security_group_rule" "allow_http_inbound" {
   type = "ingress"
-  security_group_id = aws_security_group_alb.id
+  security_group_id = aws_security_group.alb.id
 
   from_port   = local.http_port
   to_port     = local.http_port
@@ -208,7 +208,7 @@ resource "aws_security_group_rule" "allow_http_inbound" {
 # create egress security rule 
 resource "aws_security_group_rule" "allow_all_outbound" {
   type = "egress"
-  security_group_id = aws_security_group_alb.id
+  security_group_id = aws_security_group.alb.id
 
   from_port   = local.any_port
   to_port     = local.any_port
@@ -222,8 +222,8 @@ resource "aws_security_group_rule" "allow_all_outbound" {
 
 #terraform {
  # backend "s3" {
- #   key = "stage/services/webserver-cluster/terraform.tfstate"
- # }
+  #  key = "stage/services/webserver-cluster/terraform.tfstate"
+  #}
 #}
 
 # Read Database connection state file from the S3 bucket of mysql/terraform.tfstate

@@ -6,7 +6,10 @@ provider "aws" {
 # define the module
 
 module "webserver_cluster" {
-  source = "/home/ussy/osman-terraform/modules/services/webserver-cluster"
+  # source = "/home/ussy/osman-terraform/modules/services/webserver-cluster"
+
+  # source from github v0.0.1
+  source = "github.com/osm1n/osman-terraform-modules//services/webserver-cluster?ref=v0.0.2"
 
   cluster_name = "webservers-stage"
   db_remote_state_bucket = "usman-bucket"
